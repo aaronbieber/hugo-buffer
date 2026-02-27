@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:developers.buffer.com)",
+      "WebSearch",
+      "WebFetch(domain:gohugo.io)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(go:*)"
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+buffer:
+  token: "buf_..."          # or override via BUFFER_TOKEN env var
+
+channels:
+  - id: "channel_abc123"
+    name: "Bluesky"
+    char_limit: 300
+  - id: "channel_def456"
+    name: "Mastodon"
+    char_limit: 500
+
+post:
+  char_limit: 500           # global fallback if channel omits char_limit
+  template: |
+    # Available fields: .Title .Description .Link .PubDate
+    {{ .Description }}
+
+    {{ .Link }}
