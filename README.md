@@ -19,12 +19,19 @@ Requires Go 1.22+.
 ```sh
 git clone https://github.com/aaronbieber/hugo-buffer
 cd hugo-buffer
-go build -o hugo-buffer .
 ```
 
-Move the binary somewhere on your `$PATH`:
+With [just](https://github.com/casey/just):
 
 ```sh
+just build    # build ./hugo-buffer
+just install  # build and move to ~/.local/bin
+```
+
+Or directly with Go:
+
+```sh
+go build -o hugo-buffer .
 mv hugo-buffer ~/.local/bin/
 ```
 
