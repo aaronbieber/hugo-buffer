@@ -11,11 +11,11 @@ import (
 
 const bufferEndpoint = "https://api.buffer.com/graphql"
 
-const createPostMutation = `
-mutation CreatePost($text: String!, $channelId: String!) {
+const createPostMutationFmt = `
+mutation CreatePost($text: String!) {
   createPost(input: {
     text: $text,
-    channelId: $channelId,
+    channelId: "%s",
     schedulingType: automatic,
     mode: shareNow
   }) {
@@ -180,13 +180,14 @@ func (c *BufferClient) query(ctx context.Context, gql string, vars map[string]an
 }
 
 func (c *BufferClient) CreatePost(ctx context.Context, channelID, text string) (string, error) {
+	// ChannelId is a custom scalar — inlined to avoid variable type mismatch.
+	mutation := fmt.Sprintf(createPostMutationFmt, channelID)
 	vars := map[string]any{
-		"text":      text,
-		"channelId": channelID,
+		"text": text,
 	}
 
 	var data createPostResponse
-	if err := c.query(ctx, createPostMutation, vars, &data); err != nil {
+	if err := c.query(ctx, mutation, vars, &data); err != nil {
 		return "", err
 	}
 
